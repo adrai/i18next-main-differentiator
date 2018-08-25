@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <title>jQuery App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/11.6.0/i18next.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.2.1/jquery-i18next.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-browser-languagedetector/2.2.3/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next-xhr-backend/1.5.1/i18nextXHRBackend.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .App {
+        text-align: center;
+      }
+
+      .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+        height: 80px;
+      }
+
+      .App-header {
+        background-color: #222;
+        height: 150px;
+        padding: 20px;
+        color: white;
+      }
+
+      .App-intro {
+        font-size: large;
+        margin: 25px;
+      }
+
+      @keyframes App-logo-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="root">
+      <div class="App">
+        <div class="App-header">
+          <img src="https://blobscdn.gitbook.com/v0/b/gitbook-28427.appspot.com/o/spaces%2F-L9iS6Wm2hynS5H9Gj7j%2Favatar.png?generation=1523462254548780&alt=media" class="App-logo" alt="logo">
+          <h2 data-i18n="title" data-i18n="title" data-i18n-options='{ "tech": "jquery", "lib": "jquery-i18next" }'>Welcome to jquery using jquery-i18next</h2>
+        </div>
+        <button onclick="javascript: window.location.href = '?lng=de'">de</button>
+        <button onclick="javascript: window.location.href = '?lng=en'">en</button>
+        <div class="App-intro" data-i18n="description">Switch language between english and german using buttons above.</div>
+      </div>
+    </div>
+
+    <script>
+      i18next
+        .use(i18nextXHRBackend)
+        .use(i18nextBrowserLanguageDetector)
+        .init({
+          fallbackLng: 'en',
+          backend: {
+            loadPath: '../locales/{{lng}}/{{ns}}.json'
+          },
+          ns: ['translations'],
+          defaultNS: 'translations'
+        }, function(err, t) {
+          jqueryI18next.init(i18next, $, {
+            useOptionsAttr: true
+          });
+          $('body').localize();
+        }
+      );
+    </script>
+
+  </body>
+
+</html>
